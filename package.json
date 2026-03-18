@@ -1,0 +1,24 @@
+{
+  "name": "video-encoder",
+  "version": "1.0.0",
+  "description": "Client-side video compressor using FFmpeg.wasm and WebCodecs",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "vite": "^8.0.0"
+  },
+  "dependencies": {
+    "@ffmpeg/core-mt": "^0.12.10",
+    "@ffmpeg/ffmpeg": "^0.12.15",
+    "@ffmpeg/util": "^0.12.2",
+    "mp4-muxer": "^5.2.2",
+    "mp4box": "^2.3.0"
+  }
+}

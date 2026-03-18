@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Video Compressor</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Video Compressor</h1>
+        <p class="subtitle">Client-side video compression — everything stays in your browser</p>
+      </header>
+
+      <main>
+        <!-- 드래그&드롭 영역 -->
+        <div id="dropzone" class="dropzone">
+          <div class="dropzone-inner">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M15 10l-4 4l-4-4" />
+              <path d="M12 14V3" />
+              <path d="M20 21H4a2 2 0 01-2-2V5a2 2 0 012-2h16a2 2 0 012 2v14a2 2 0 01-2 2z" />
+            </svg>
+            <p>Drag & drop a video file or click to select</p>
+            <span class="dropzone-hint">Supports MP4, MOV, AVI, MKV and more · Up to 2GB</span>
+          </div>
+          <input type="file" id="file-input" accept="video/*" hidden />
+        </div>
+
+        <!-- 파일 정보 (파일 선택 후 표시) -->
+        <div id="file-info" class="file-info hidden">
+          <span id="file-name" class="file-name"></span>
+          <span id="file-size-original" class="file-size"></span>
+          <button id="btn-clear" class="btn-clear" title="Remove file">×</button>
+        </div>
+
+        <!-- 옵션 패널 -->
+        <div id="options-panel" class="options-panel hidden">
+          <div class="option-group">
+            <label>Quality (CRF)</label>
+            <div class="slider-row">
+              <span class="slider-label">High quality</span>
+              <input type="range" id="crf-slider" min="18" max="40" value="23" />
+              <span class="slider-label">Low quality</span>
+            </div>
+            <div class="slider-value">
+              CRF: <strong id="crf-value">23</strong>
+              &nbsp;·&nbsp; Quality:
+              <strong id="quality-label">Medium</strong>
+            </div>
+          </div>
+
+          <div class="option-group">
+            <label>Resolution</label>
+            <div class="resolution-buttons">
+              <button class="res-btn active" data-res="original">Original</button>
+              <button class="res-btn" data-res="1080">1080p</button>
+              <button class="res-btn" data-res="720">720p</button>
+              <button class="res-btn" data-res="480">480p</button>
+            </div>
+          </div>
+
+          <div class="option-group">
+            <label class="toggle-label">
+              Remove Audio
+              <div class="toggle-wrapper">
+                <input type="checkbox" id="remove-audio" />
+                <span class="toggle-switch"></span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- 압축 시작 버튼 -->
+        <button id="btn-compress" class="btn-compress hidden" disabled>
+          Compress
+        </button>
+
+        <!-- 진행률 바 -->
+        <div id="progress-section" class="progress-section hidden">
+          <div class="progress-bar-wrapper">
+            <div id="progress-bar" class="progress-bar" style="width: 0%"></div>
+          </div>
+          <div class="progress-meta">
+            <span id="progress-percent">0%</span>
+            &nbsp;|&nbsp; Engine: <span id="engine-label">—</span>
+          </div>
+        </div>
+
+        <!-- 결과 카드 -->
+        <div id="result-card" class="result-card hidden">
+          <div class="result-sizes">
+            <div class="result-size">
+              <span class="result-size-label">Original</span>
+              <span id="result-original-size" class="result-size-value">—</span>
+            </div>
+            <div class="result-arrow">→</div>
+            <div class="result-size">
+              <span class="result-size-label">Compressed</span>
+              <span id="result-compressed-size" class="result-size-value">—</span>
+            </div>
+          </div>
+          <p id="result-ratio" class="result-ratio"></p>
+          <button id="btn-download" class="btn-download">Download</button>
+          <button id="btn-reset" class="btn-reset">Compress another file</button>
+        </div>
+
+        <!-- 에러 메시지 -->
+        <div id="error-message" class="error-message hidden"></div>
+      </main>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
