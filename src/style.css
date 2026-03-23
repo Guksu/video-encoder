@@ -459,6 +459,24 @@ input[type="range"]::-webkit-slider-thumb:hover {
   background: var(--accent-hover);
 }
 
+.btn-recompress {
+  display: inline-block;
+  padding: 12px 24px;
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  margin-right: 10px;
+}
+
+.btn-recompress:hover {
+  background: rgba(20, 184, 166, 0.1);
+}
+
 .btn-reset {
   display: inline-block;
   padding: 12px 24px;

@@ -19,6 +19,7 @@ const dict: Record<string, [string, string]> = {
   'result-compressed':  ['Compressed', '압축 후'],
   'btn-download':       ['Download', '다운로드'],
   'btn-reset':          ['Compress another file', '다른 파일 압축하기'],
+  'btn-recompress':     ['Re-compress with different options', '다른 옵션으로 재압축'],
   'result-ratio':       ['▼ {n}% smaller', '▼ {n}% 감소'],
   'err-too-large':      ['File size exceeds 2GB. Please select a smaller file.', '파일 크기가 2GB를 초과합니다. 더 작은 파일을 선택해 주세요.'],
   'err-oom':            ['Out of memory. The file may be too large.', '메모리가 부족합니다. 파일이 너무 클 수 있습니다.'],

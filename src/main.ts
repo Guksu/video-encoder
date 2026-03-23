@@ -91,6 +91,13 @@ function resetApp(): void {
   hideError();
 }
 
+function recompressApp(): void {
+  state.status = 'idle';
+  state.outputBlob = null;
+  btnCompress.disabled = false;
+  hideError();
+}
+
 // CRF 슬라이더
 crfSlider.addEventListener('input', () => {
   state.crf = parseInt(crfSlider.value, 10);
@@ -153,7 +160,8 @@ btnCompress.addEventListener('click', async () => {
       state.compressedSize,
       result.blob,
       state.file.name,
-      resetApp
+      resetApp,
+      recompressApp
     );
   } catch (err) {
     state.status = 'error';

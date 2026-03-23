@@ -6,13 +6,15 @@ export function showResult(
   compressedSize: number,
   blob: Blob,
   fileName: string,
-  onReset: () => void
+  onReset: () => void,
+  onRecompress: () => void
 ): void {
   const card = document.getElementById('result-card')!;
   const originalSizeEl = document.getElementById('result-original-size')!;
   const compressedSizeEl = document.getElementById('result-compressed-size')!;
   const ratioEl = document.getElementById('result-ratio')!;
   const btnDownload = document.getElementById('btn-download') as HTMLButtonElement;
+  const btnRecompress = document.getElementById('btn-recompress') as HTMLButtonElement;
   const btnReset = document.getElementById('btn-reset') as HTMLButtonElement;
 
   originalSizeEl.textContent = formatBytes(originalSize);
@@ -41,6 +43,17 @@ export function showResult(
         objectUrl = null;
       }
     }, 10_000);
+  });
+
+  const newRecompress = btnRecompress.cloneNode(true) as HTMLButtonElement;
+  btnRecompress.parentNode!.replaceChild(newRecompress, btnRecompress);
+  newRecompress.addEventListener('click', () => {
+    if (objectUrl) {
+      URL.revokeObjectURL(objectUrl);
+      objectUrl = null;
+    }
+    card.classList.add('hidden');
+    onRecompress();
   });
 
   const newReset = btnReset.cloneNode(true) as HTMLButtonElement;
