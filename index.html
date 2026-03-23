@@ -9,26 +9,33 @@
   <body>
     <div class="container">
       <header>
-        <h1>Video Compressor</h1>
-        <p class="subtitle">Client-side video compression — everything stays in your browser</p>
+        <div class="header-top">
+          <h1>Video Compressor</h1>
+          <div class="lang-toggle">
+            <button class="lang-btn active" data-lang="en">EN</button>
+            <span class="lang-sep">|</span>
+            <button class="lang-btn" data-lang="ko">KO</button>
+          </div>
+        </div>
+        <p class="subtitle" data-i18n="subtitle">Client-side video compression — everything stays in your browser</p>
       </header>
 
       <main>
         <!-- 드래그&드롭 영역 -->
         <div id="dropzone" class="dropzone">
           <div class="dropzone-inner">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M15 10l-4 4l-4-4" />
-              <path d="M12 14V3" />
-              <path d="M20 21H4a2 2 0 01-2-2V5a2 2 0 012-2h16a2 2 0 012 2v14a2 2 0 01-2 2z" />
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+              <polyline points="17 8 12 3 7 8" />
+              <line x1="12" y1="3" x2="12" y2="15" />
             </svg>
-            <p>Drag & drop a video file or click to select</p>
-            <span class="dropzone-hint">Supports MP4, MOV, AVI, MKV and more · Up to 2GB</span>
+            <p data-i18n="dropzone-text">Drag & drop a video file or click to select</p>
+            <span class="dropzone-hint" data-i18n="dropzone-hint">Supports MP4, MOV, AVI, MKV and more · Up to 2GB</span>
           </div>
           <input type="file" id="file-input" accept="video/*" hidden />
         </div>
 
-        <!-- 파일 정보 (파일 선택 후 표시) -->
+        <!-- 파일 정보 -->
         <div id="file-info" class="file-info hidden">
           <span id="file-name" class="file-name"></span>
           <span id="file-size-original" class="file-size"></span>
@@ -38,11 +45,11 @@
         <!-- 옵션 패널 -->
         <div id="options-panel" class="options-panel hidden">
           <div class="option-group">
-            <label>Quality (CRF)</label>
+            <label data-i18n="label-quality">Quality (CRF)</label>
             <div class="slider-row">
-              <span class="slider-label">High quality</span>
+              <span class="slider-label" data-i18n="slider-high">High quality</span>
               <input type="range" id="crf-slider" min="18" max="40" value="23" />
-              <span class="slider-label">Low quality</span>
+              <span class="slider-label" data-i18n="slider-low">Low quality</span>
             </div>
             <div class="slider-value">
               CRF: <strong id="crf-value">23</strong>
@@ -52,9 +59,9 @@
           </div>
 
           <div class="option-group">
-            <label>Resolution</label>
+            <label data-i18n="label-resolution">Resolution</label>
             <div class="resolution-buttons">
-              <button class="res-btn active" data-res="original">Original</button>
+              <button class="res-btn active" data-res="original" data-i18n="res-original">Original</button>
               <button class="res-btn" data-res="1080">1080p</button>
               <button class="res-btn" data-res="720">720p</button>
               <button class="res-btn" data-res="480">480p</button>
@@ -63,7 +70,7 @@
 
           <div class="option-group">
             <label class="toggle-label">
-              Remove Audio
+              <span data-i18n="label-remove-audio">Remove Audio</span>
               <div class="toggle-wrapper">
                 <input type="checkbox" id="remove-audio" />
                 <span class="toggle-switch"></span>
@@ -73,7 +80,7 @@
         </div>
 
         <!-- 압축 시작 버튼 -->
-        <button id="btn-compress" class="btn-compress hidden" disabled>
+        <button id="btn-compress" class="btn-compress hidden" disabled data-i18n="btn-compress">
           Compress
         </button>
 
@@ -92,23 +99,80 @@
         <div id="result-card" class="result-card hidden">
           <div class="result-sizes">
             <div class="result-size">
-              <span class="result-size-label">Original</span>
+              <span class="result-size-label" data-i18n="result-orig">Original</span>
               <span id="result-original-size" class="result-size-value">—</span>
             </div>
             <div class="result-arrow">→</div>
             <div class="result-size">
-              <span class="result-size-label">Compressed</span>
+              <span class="result-size-label" data-i18n="result-compressed">Compressed</span>
               <span id="result-compressed-size" class="result-size-value">—</span>
             </div>
           </div>
           <p id="result-ratio" class="result-ratio"></p>
-          <button id="btn-download" class="btn-download">Download</button>
-          <button id="btn-reset" class="btn-reset">Compress another file</button>
+          <button id="btn-download" class="btn-download" data-i18n="btn-download">Download</button>
+          <button id="btn-reset" class="btn-reset" data-i18n="btn-reset">Compress another file</button>
         </div>
 
         <!-- 에러 메시지 -->
         <div id="error-message" class="error-message hidden"></div>
       </main>
+
+      <footer class="guide">
+        <section class="guide-section">
+          <h2 data-i18n="guide-what-title">What is this?</h2>
+          <p data-i18n-html="guide-what-body">
+            Video Compressor is a <strong>100% client-side</strong> video compression tool.
+            Your files never leave your browser — no uploads, no servers, no privacy concerns.
+            It uses <strong>WebCodecs</strong> (GPU-accelerated, Chrome/Edge) or
+            <strong>FFmpeg.wasm</strong> (universal fallback) depending on your browser.
+          </p>
+        </section>
+
+        <section class="guide-section">
+          <h2 data-i18n="guide-how-title">How to use</h2>
+          <ol class="guide-steps">
+            <li>
+              <span class="step-num">1</span>
+              <div>
+                <strong data-i18n="step1-title">Select a video</strong>
+                <p data-i18n="step1-body">Drag & drop a file onto the upload area, or click to pick one. Supports MP4, MOV, AVI, MKV and more (up to 2 GB).</p>
+              </div>
+            </li>
+            <li>
+              <span class="step-num">2</span>
+              <div>
+                <strong data-i18n="step2-title">Adjust options</strong>
+                <p data-i18n-html="step2-body">Set the <em>Quality (CRF)</em> — lower value = better quality, larger file. Choose a target resolution, and optionally strip the audio track.</p>
+              </div>
+            </li>
+            <li>
+              <span class="step-num">3</span>
+              <div>
+                <strong data-i18n="step3-title">Compress</strong>
+                <p data-i18n-html="step3-body">Click <em>Compress</em> and watch the real-time progress bar. The engine label shows whether GPU (WebCodecs) or software (FFmpeg) is being used.</p>
+              </div>
+            </li>
+            <li>
+              <span class="step-num">4</span>
+              <div>
+                <strong data-i18n="step4-title">Download</strong>
+                <p data-i18n-html="step4-body">Once done, the before/after sizes are shown. Click <em>Download</em> to save the compressed file.</p>
+              </div>
+            </li>
+          </ol>
+        </section>
+
+        <section class="guide-section guide-tips">
+          <h2 data-i18n="guide-tips-title">Tips</h2>
+          <ul>
+            <li data-i18n-html="tip-1"><strong>CRF 18–22</strong> — High quality, modest size reduction</li>
+            <li data-i18n-html="tip-2"><strong>CRF 23–28</strong> — Balanced quality and compression (recommended)</li>
+            <li data-i18n-html="tip-3"><strong>CRF 29–40</strong> — Maximum compression, noticeable quality loss</li>
+            <li data-i18n-html="tip-4">Dropping to <strong>720p</strong> often cuts file size in half with little visible difference on most screens.</li>
+            <li data-i18n-html="tip-5">Removing audio is great for silent clips — it can save 5–15% extra.</li>
+          </ul>
+        </section>
+      </footer>
     </div>
 
     <script type="module" src="/src/main.ts"></script>

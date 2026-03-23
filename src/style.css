@@ -5,15 +5,15 @@
 }
 
 :root {
-  --bg: #0f0f11;
-  --surface: #1a1a1f;
-  --surface2: #242429;
-  --border: #2e2e36;
-  --accent: #7c6ef5;
-  --accent-hover: #6a5ce6;
-  --text: #e8e8f0;
-  --text-muted: #8888a0;
-  --success: #4ade80;
+  --bg: #ffffff;
+  --surface: #f0fdfb;
+  --surface2: #e0f7f3;
+  --border: #b2e4dd;
+  --accent: #14b8a6;
+  --accent-hover: #0d9488;
+  --text: #1a2e2a;
+  --text-muted: #6b8c86;
+  --success: #10b981;
   --error: #f87171;
   --radius: 12px;
 }
@@ -39,11 +39,55 @@ header {
   margin-bottom: 36px;
 }
 
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 6px;
+}
+
+.lang-toggle {
+  position: absolute;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.lang-sep {
+  font-size: 0.75rem;
+  color: var(--border);
+}
+
+.lang-btn {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.lang-btn.active {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(20, 184, 166, 0.1);
+}
+
+.lang-btn:hover:not(.active) {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
 header h1 {
   font-size: 2rem;
   font-weight: 700;
   letter-spacing: -0.02em;
-  background: linear-gradient(135deg, var(--accent), #a78bfa);
+  background: linear-gradient(135deg, var(--accent), #34d399);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -69,7 +113,7 @@ header h1 {
 .dropzone:hover,
 .dropzone.drag-over {
   border-color: var(--accent);
-  background: #1a1a2e;
+  background: #e0f7f3;
 }
 
 .dropzone-inner {
@@ -150,7 +194,7 @@ header h1 {
   gap: 20px;
 }
 
-.option-group > label:first-child {
+.option-group > label:first-child:not(.toggle-label) {
   display: block;
   font-size: 0.85rem;
   font-weight: 600;
@@ -196,7 +240,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 input[type="range"]::-webkit-slider-thumb:hover {
-  box-shadow: 0 0 0 4px rgba(124, 110, 245, 0.3);
+  box-shadow: 0 0 0 4px rgba(20, 184, 166, 0.3);
 }
 
 .slider-value {
@@ -230,7 +274,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
 
 .res-btn.active {
   border-color: var(--accent);
-  background: rgba(124, 110, 245, 0.15);
+  background: rgba(20, 184, 166, 0.15);
   color: var(--accent);
   font-weight: 600;
 }
@@ -239,7 +283,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
 .toggle-label {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 10px;
   cursor: pointer;
   font-size: 0.9rem;
 }
@@ -329,7 +373,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
 
 .progress-bar {
   height: 100%;
-  background: linear-gradient(90deg, var(--accent), #a78bfa);
+  background: linear-gradient(90deg, var(--accent), #34d399);
   border-radius: 6px;
   transition: width 0.3s ease;
 }
@@ -446,4 +490,104 @@ input[type="range"]::-webkit-slider-thumb:hover {
 /* Utility */
 .hidden {
   display: none !important;
+}
+
+/* Guide footer */
+.guide {
+  margin-top: 48px;
+  padding-bottom: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.guide-section h2 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.guide-section > p {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+.guide-section > p strong {
+  color: var(--text);
+}
+
+.guide-steps {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.guide-steps li {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.step-num {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(20, 184, 166, 0.15);
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
+}
+
+.guide-steps li > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.guide-steps li strong {
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+.guide-steps li p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.guide-tips ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.guide-tips li {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  padding-left: 14px;
+  position: relative;
+}
+
+.guide-tips li::before {
+  content: '·';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.guide-tips li strong {
+  color: var(--text);
 }

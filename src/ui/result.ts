@@ -1,4 +1,5 @@
 import { formatBytes, calcReductionPercent } from '../utils/format';
+import { t } from '../i18n';
 
 export function showResult(
   originalSize: number,
@@ -18,7 +19,7 @@ export function showResult(
   compressedSizeEl.textContent = formatBytes(compressedSize);
 
   const reduction = calcReductionPercent(originalSize, compressedSize);
-  ratioEl.textContent = `▼ ${reduction}% smaller`;
+  ratioEl.textContent = t('result-ratio', { n: reduction });
 
   // 기존 이벤트 교체를 위해 클론
   const newDownload = btnDownload.cloneNode(true) as HTMLButtonElement;

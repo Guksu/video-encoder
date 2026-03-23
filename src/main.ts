@@ -6,6 +6,8 @@ import { compress } from './engine/index';
 import type { EngineType } from './engine/index';
 import { formatBytes } from './utils/format';
 import type { Resolution } from './utils/resolution';
+import { t, setLang, getLang } from './i18n';
+import type { Lang } from './i18n';
 
 interface AppState {
   file: File | null;
@@ -52,7 +54,7 @@ const errorMessageEl = document.getElementById('error-message')!;
 function onFileSelected(file: File): void {
   const MAX_SIZE = 2 * 1024 * 1024 * 1024; // 2GB
   if (file.size > MAX_SIZE) {
-    showError('File size exceeds 2GB. Please select a smaller file.');
+    showError(t('err-too-large'));
     return;
   }
 
@@ -97,9 +99,9 @@ crfSlider.addEventListener('input', () => {
 });
 
 function getQualityLabel(crf: number): string {
-  if (crf <= 22) return 'High';
-  if (crf <= 28) return 'Medium';
-  return 'Low';
+  if (crf <= 22) return t('quality-high');
+  if (crf <= 28) return t('quality-medium');
+  return t('quality-low');
 }
 
 // 해상도 버튼
@@ -161,9 +163,9 @@ btnCompress.addEventListener('click', async () => {
     const msg = err instanceof Error ? err.message : 'An unknown error occurred.';
 
     if (msg.toLowerCase().includes('out of memory') || msg.toLowerCase().includes('oom')) {
-      showError('Out of memory. The file may be too large.');
+      showError(t('err-oom'));
     } else {
-      showError(`Compression failed: ${msg}`);
+      showError(t('err-compress') + msg);
     }
   }
 });
@@ -180,3 +182,16 @@ function hideError(): void {
 
 // 드롭존 초기화
 initDropzone(onFileSelected);
+
+// 언어 토글
+const langBtns = document.querySelectorAll<HTMLButtonElement>('.lang-btn');
+langBtns.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const lang = btn.dataset.lang as Lang;
+    if (lang === getLang()) return;
+    setLang(lang);
+    langBtns.forEach((b) => b.classList.toggle('active', b.dataset.lang === lang));
+    // 동적으로 렌더된 텍스트 갱신
+    qualityLabelEl.textContent = getQualityLabel(state.crf);
+  });
+});
