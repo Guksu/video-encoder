@@ -102,13 +102,19 @@ function recompressApp(): void {
 crfSlider.addEventListener('input', () => {
   state.crf = parseInt(crfSlider.value, 10);
   crfValueEl.textContent = String(state.crf);
-  qualityLabelEl.textContent = getQualityLabel(state.crf);
+  updateQualityLabel(state.crf);
+  crfSlider.style.setProperty('--slider-percent', `${((state.crf - 18) / (40 - 18)) * 100}%`);
 });
 
 function getQualityLabel(crf: number): string {
   if (crf <= 22) return t('quality-high');
   if (crf <= 28) return t('quality-medium');
   return t('quality-low');
+}
+
+function updateQualityLabel(crf: number): void {
+  qualityLabelEl.textContent = getQualityLabel(crf);
+  qualityLabelEl.className = 'quality-badge ' + (crf <= 22 ? 'quality-high' : crf <= 28 ? 'quality-medium' : 'quality-low');
 }
 
 // 해상도 버튼
@@ -188,6 +194,9 @@ function hideError(): void {
   errorMessageEl.textContent = '';
 }
 
+// 슬라이더 초기 상태
+crfSlider.style.setProperty('--slider-percent', `${((state.crf - 18) / (40 - 18)) * 100}%`);
+
 // 드롭존 초기화
 initDropzone(onFileSelected);
 
@@ -200,6 +209,6 @@ langBtns.forEach((btn) => {
     setLang(lang);
     langBtns.forEach((b) => b.classList.toggle('active', b.dataset.lang === lang));
     // 동적으로 렌더된 텍스트 갱신
-    qualityLabelEl.textContent = getQualityLabel(state.crf);
+    updateQualityLabel(state.crf);
   });
 });

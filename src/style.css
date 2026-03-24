@@ -47,12 +47,24 @@ header {
   margin-bottom: 6px;
 }
 
-.lang-toggle {
+.header-controls {
   position: absolute;
   right: 0;
   display: flex;
   align-items: center;
   gap: 4px;
+}
+
+.github-link {
+  display: flex;
+  align-items: center;
+  color: var(--text-muted);
+  transition: color 0.15s;
+  padding: 2px 4px;
+}
+
+.github-link:hover {
+  color: var(--accent);
 }
 
 .lang-sep {
@@ -106,73 +118,129 @@ header h1 {
   padding: 48px 24px;
   text-align: center;
   cursor: pointer;
-  transition: border-color 0.2s, background 0.2s;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
   background: var(--surface);
 }
 
 .dropzone:hover,
 .dropzone.drag-over {
   border-color: var(--accent);
-  background: #e0f7f3;
+  background: #e8fdf9;
+  box-shadow: 0 0 0 4px rgba(20, 184, 166, 0.08);
+}
+
+.dropzone.drag-over .dropzone-icon {
+  transform: scale(1.1);
+  background: rgba(20, 184, 166, 0.2);
 }
 
 .dropzone-inner {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   pointer-events: none;
 }
 
-.dropzone-inner svg {
-  color: var(--text-muted);
+.dropzone-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(20, 184, 166, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  margin-bottom: 4px;
+  transition: transform 0.2s, background 0.2s;
 }
 
-.dropzone-inner p {
+.dropzone-title {
   font-size: 1rem;
-  color: var(--text-muted);
+  font-weight: 500;
+  color: var(--text);
+}
+
+.dropzone-browse {
+  display: inline-block;
+  padding: 6px 20px;
+  background: var(--accent);
+  color: white;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.dropzone:hover .dropzone-browse {
+  background: var(--accent-hover);
 }
 
 .dropzone-hint {
   font-size: 0.8rem;
   color: var(--text-muted);
   opacity: 0.7;
+  margin-top: 2px;
 }
 
 /* File info */
 .file-info {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 12px 16px;
+  padding: 14px 16px;
   margin-top: 12px;
 }
 
-.file-name {
+.file-icon {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background: rgba(20, 184, 166, 0.12);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.file-meta {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  overflow: hidden;
+}
+
+.file-name {
   font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .file-size {
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   color: var(--text-muted);
   white-space: nowrap;
 }
 
 .btn-clear {
+  flex-shrink: 0;
   background: none;
   border: none;
   color: var(--text-muted);
   cursor: pointer;
-  font-size: 1.2rem;
-  line-height: 1;
-  padding: 2px 6px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 6px;
   transition: color 0.15s, background 0.15s;
 }
@@ -187,21 +255,30 @@ header h1 {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 20px;
+  padding: 0;
   margin-top: 16px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  overflow: hidden;
+}
+
+.option-group {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.option-group:last-child {
+  border-bottom: none;
 }
 
 .option-group > label:first-child:not(.toggle-label) {
   display: block;
-  font-size: 0.85rem;
-  font-weight: 600;
+  font-size: 0.75rem;
+  font-weight: 700;
   color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 10px;
+  letter-spacing: 0.07em;
+  margin-bottom: 12px;
 }
 
 /* CRF Slider */
@@ -218,65 +295,112 @@ header h1 {
 }
 
 input[type="range"] {
+  --slider-percent: 22%;
   flex: 1;
   -webkit-appearance: none;
   appearance: none;
-  height: 4px;
-  border-radius: 2px;
-  background: var(--border);
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(
+    to right,
+    var(--accent) 0%,
+    var(--accent) var(--slider-percent),
+    var(--border) var(--slider-percent),
+    var(--border) 100%
+  );
   outline: none;
 }
 
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
-  background: var(--accent);
+  background: white;
   cursor: pointer;
-  border: 2px solid var(--bg);
-  box-shadow: 0 0 0 2px var(--accent);
-  transition: box-shadow 0.15s;
+  border: 2px solid var(--accent);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  transition: box-shadow 0.15s, transform 0.1s;
 }
 
 input[type="range"]::-webkit-slider-thumb:hover {
-  box-shadow: 0 0 0 4px rgba(20, 184, 166, 0.3);
+  box-shadow: 0 0 0 6px rgba(20, 184, 166, 0.15);
+  transform: scale(1.1);
 }
 
-.slider-value {
-  margin-top: 8px;
-  font-size: 0.85rem;
+.slider-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.crf-badge {
+  font-size: 0.82rem;
   color: var(--text-muted);
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 3px 10px;
+}
+
+.crf-badge strong {
+  color: var(--text);
+}
+
+.quality-badge {
+  font-size: 0.82rem;
+  font-weight: 600;
+  border-radius: 6px;
+  padding: 3px 10px;
+}
+
+.quality-high {
+  background: rgba(16, 185, 129, 0.12);
+  color: #059669;
+}
+
+.quality-medium {
+  background: rgba(245, 158, 11, 0.12);
+  color: #d97706;
+}
+
+.quality-low {
+  background: rgba(239, 68, 68, 0.12);
+  color: #dc2626;
 }
 
 /* Resolution buttons */
 .resolution-buttons {
   display: flex;
-  gap: 8px;
+  gap: 6px;
 }
 
 .res-btn {
   flex: 1;
-  padding: 8px 12px;
+  padding: 10px 8px;
   border: 1px solid var(--border);
   border-radius: 8px;
-  background: var(--surface2);
+  background: var(--bg);
   color: var(--text-muted);
   font-size: 0.85rem;
+  font-weight: 500;
   cursor: pointer;
   transition: all 0.15s;
 }
 
-.res-btn:hover {
+.res-btn:hover:not(.active) {
   border-color: var(--accent);
   color: var(--text);
+  background: var(--surface);
 }
 
 .res-btn.active {
   border-color: var(--accent);
-  background: rgba(20, 184, 166, 0.15);
-  color: var(--accent);
+  background: var(--accent);
+  color: white;
   font-weight: 600;
+  box-shadow: 0 2px 8px rgba(20, 184, 166, 0.3);
 }
 
 /* Toggle */
@@ -336,18 +460,22 @@ input[type="range"]::-webkit-slider-thumb:hover {
   width: 100%;
   margin-top: 16px;
   padding: 14px;
-  background: var(--accent);
+  background: linear-gradient(135deg, var(--accent), #34d399);
   color: white;
   border: none;
   border-radius: var(--radius);
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.15s, opacity 0.15s;
+  transition: opacity 0.15s, filter 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .btn-compress:hover:not(:disabled) {
-  background: var(--accent-hover);
+  filter: brightness(1.08);
 }
 
 .btn-compress:disabled {
@@ -441,8 +569,15 @@ input[type="range"]::-webkit-slider-thumb:hover {
   margin-bottom: 20px;
 }
 
+.result-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .btn-download {
-  display: inline-block;
+  display: block;
+  width: 100%;
   padding: 12px 32px;
   background: var(--accent);
   color: white;
@@ -452,7 +587,6 @@ input[type="range"]::-webkit-slider-thumb:hover {
   font-weight: 600;
   cursor: pointer;
   transition: background 0.15s;
-  margin-right: 10px;
 }
 
 .btn-download:hover {
@@ -460,7 +594,8 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 .btn-recompress {
-  display: inline-block;
+  display: block;
+  width: 100%;
   padding: 12px 24px;
   background: transparent;
   color: var(--accent);
@@ -470,7 +605,6 @@ input[type="range"]::-webkit-slider-thumb:hover {
   font-weight: 600;
   cursor: pointer;
   transition: all 0.15s;
-  margin-right: 10px;
 }
 
 .btn-recompress:hover {
@@ -478,7 +612,8 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 .btn-reset {
-  display: inline-block;
+  display: block;
+  width: 100%;
   padding: 12px 24px;
   background: var(--surface2);
   color: var(--text-muted);
