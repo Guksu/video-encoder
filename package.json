@@ -1,6 +1,6 @@
 {
   "name": "video-encoder",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Client-side video compressor using FFmpeg.wasm and WebCodecs",
   "scripts": {
     "dev": "vite",
