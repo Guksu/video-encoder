@@ -1,0 +1,37 @@
+# Video Compressor
+
+> A free, 100% client-side video compression tool that runs entirely in the browser. No file uploads, no servers, no privacy concerns.
+
+## What it does
+
+Video Compressor lets users reduce video file sizes directly in their browser using either WebCodecs (GPU-accelerated, Chrome/Edge) or FFmpeg.wasm (universal fallback for Firefox/Safari). The compressed file is downloaded locally — nothing is ever sent to a server.
+
+## Key features
+
+- **100% private**: Files never leave the user's browser
+- **GPU acceleration**: Uses the WebCodecs API with hardware encoding on supported browsers
+- **Universal fallback**: FFmpeg.wasm handles browsers without WebCodecs support
+- **Quality control**: Adjustable CRF value (18–40) for fine-grained quality/size tradeoff
+- **Resolution selection**: Original, 1080p, 720p, or 480p
+- **Audio removal**: Optional stripping of the audio track
+- **Before/after comparison**: Displays original and compressed file sizes with reduction percentage
+
+## Technology
+
+- Frontend: Vite + Vanilla TypeScript (no framework)
+- Compression Engine A: WebCodecs API + mp4-muxer (GPU-accelerated, Chrome/Edge 94+)
+- Compression Engine B: @ffmpeg/ffmpeg + @ffmpeg/core-mt (multithreaded WASM, universal)
+- No backend, no database, no analytics
+
+## Supported formats
+
+Input: MP4, MOV, AVI, MKV, and other common video formats (up to 2GB)
+Output: MP4 (H.264)
+
+## Source code
+
+https://github.com/Guksu/video-encoder
+
+## Live URL
+
+https://video-encoder-henna.vercel.app/

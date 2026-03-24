@@ -1,4 +1,5 @@
 import './style.css';
+import { inject } from '@vercel/analytics';
 import { initDropzone } from './ui/dropzone';
 import { showProgress, updateProgress, hideProgress } from './ui/progress';
 import { showResult, hideResult } from './ui/result';
@@ -193,6 +194,9 @@ function hideError(): void {
   errorMessageEl.classList.add('hidden');
   errorMessageEl.textContent = '';
 }
+
+// Vercel Analytics
+inject();
 
 // 슬라이더 초기 상태
 crfSlider.style.setProperty('--slider-percent', `${((state.crf - 18) / (40 - 18)) * 100}%`);

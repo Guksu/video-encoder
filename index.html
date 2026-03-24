@@ -3,7 +3,54 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Video Compressor</title>
+
+    <!-- Primary SEO -->
+    <title>Video Compressor — Free In-Browser Video Compression</title>
+    <meta name="description" content="Compress videos instantly in your browser — no uploads, no servers, 100% private. Powered by WebCodecs (GPU) and FFmpeg.wasm. Free, fast, and secure." />
+    <meta name="keywords" content="video compressor, compress video online, free video compressor, browser video compression, no upload video compressor, WebCodecs, FFmpeg, MP4 compressor, reduce video size" />
+    <link rel="canonical" href="https://video-encoder-henna.vercel.app/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://video-encoder-henna.vercel.app/" />
+    <meta property="og:title" content="Video Compressor — Free In-Browser Video Compression" />
+    <meta property="og:description" content="Compress videos instantly in your browser — no uploads, no servers, 100% private. Powered by WebCodecs (GPU) and FFmpeg.wasm." />
+    <meta property="og:site_name" content="Video Compressor" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Video Compressor — Free In-Browser Video Compression" />
+    <meta name="twitter:description" content="Compress videos instantly in your browser — no uploads, no servers, 100% private. Powered by WebCodecs (GPU) and FFmpeg.wasm." />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Video Compressor",
+      "url": "https://video-encoder-henna.vercel.app/",
+      "description": "A free, 100% client-side video compression tool. Files never leave your browser. Uses WebCodecs (GPU-accelerated) on Chrome/Edge and FFmpeg.wasm as a universal fallback.",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires a modern browser. Chrome or Edge recommended for GPU acceleration.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "100% client-side — no file uploads",
+        "GPU-accelerated compression via WebCodecs",
+        "FFmpeg.wasm fallback for all browsers",
+        "Adjustable quality (CRF 18–40)",
+        "Resolution selection (Original, 1080p, 720p, 480p)",
+        "Optional audio removal",
+        "Before/after file size comparison"
+      ],
+      "codeRepository": "https://github.com/Guksu/video-encoder"
+    }
+    </script>
+
     <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body>
