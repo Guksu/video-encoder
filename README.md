@@ -2,6 +2,8 @@
 
 **[한국어](README.ko.md)** | English
 
+**🔗 Live Demo: [video-encoder-henna.vercel.app](https://video-encoder-henna.vercel.app/)**
+
 > A client-side video compressor that runs entirely in the browser — no server required.
 
 Combines WebCodecs API (GPU-accelerated) with FFmpeg.wasm (CPU fallback) in a hybrid engine architecture. Your videos never leave your device.

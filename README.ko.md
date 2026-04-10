@@ -2,6 +2,8 @@
 
 [English](README.md) | **한국어**
 
+**🔗 배포 주소: [video-encoder-henna.vercel.app](https://video-encoder-henna.vercel.app/)**
+
 > 서버 없이 브라우저에서 동작하는 클라이언트 사이드 비디오 압축기
 
 WebCodecs API(GPU 가속)와 FFmpeg.wasm(CPU 폴백)을 결합한 하이브리드 엔진으로, 영상을 외부 서버에 업로드하지 않고 로컬에서 압축합니다.
